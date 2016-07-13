@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -32,6 +33,33 @@ public class SignUpActivity extends AppCompatActivity {
         avata4RadioButton = (RadioButton)findViewById(R.id.radioButton5);
 
 
+        //Radio Controller คือ เลือก Avata รูปไหนก็ต้องได้รูปนั้นในตอนเล่นจริง
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                switch(checkedId){
+                    case R.id.radioButton:
+                        avataString = "0";
+                        break;
+                    case R.id.radioButton2:
+                        avataString = "1";
+                        break;
+                    case R.id.radioButton3:
+                        avataString = "2";
+                        break;
+                    case R.id.radioButton4:
+                        avataString = "3";
+                        break;
+                    case R.id.radioButton5:
+                        avataString = "4";
+                        break;
+                        
+                }
+            }
+        });
+
+
 
     } // Main Method
 
@@ -47,8 +75,32 @@ public class SignUpActivity extends AppCompatActivity {
 
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this,"มีช่องว่าง","กรุณากรอกทุกช่อง คะ");
-        }
+
+        } else if (checkChoose()) {
+            //ถ้าเป็น true Checked
+
+        } else {
+           //ถ้าเป็น false Un Check
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "ยังไม่เลือก Avata",
+                    "กรุณาเลือก Avata ด้วยคะ");
+
+
+        } 
 
     } // clinkSignUp
+
+    private boolean checkChoose() {
+
+        boolean status = true;
+        status = avata0RadioButton.isChecked() ||
+                avata1RadioButton.isClickable() ||
+                avata2RadioButton.isClickable() ||
+                avata3RadioButton.isClickable() ||
+                avata4RadioButton.isClickable();
+        return status;
+
+
+    }
 
 }// Main Class
