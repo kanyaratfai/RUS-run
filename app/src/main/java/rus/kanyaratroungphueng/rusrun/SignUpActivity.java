@@ -14,7 +14,7 @@ public class SignUpActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton avata0RadioButton,avata1RadioButton,
             avata2RadioButton,avata3RadioButton,avata4RadioButton;
-
+    private String nameString, userString,passwordString,avataString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +37,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void clickSignUpSign(View view){
 
-    } // clinkSignUpSign
+        //Get Value from Edit Text วิธีเอาค่าเข้าไปในตัวแปร name
+        nameString = nameEditText.getText().toString().trim();
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
+    } // clinkSignUp
 
 }// Main Class
