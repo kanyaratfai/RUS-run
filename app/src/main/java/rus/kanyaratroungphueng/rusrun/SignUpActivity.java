@@ -42,6 +42,13 @@ public class SignUpActivity extends AppCompatActivity {
         userString = userEditText.getText().toString().trim();
         passwordString = passwordEditText.getText().toString().trim();
 
+        //Check Space ตั้ง่คาเงื่อนไข
+        if (nameString.equals("") || userString.equals("") || passwordString.equals("")) {
+
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this,"มีช่องว่าง","กรุณากรอกทุกช่อง คะ");
+        }
+
     } // clinkSignUp
 
 }// Main Class
