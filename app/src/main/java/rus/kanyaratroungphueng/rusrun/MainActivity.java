@@ -9,11 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         // Explicit ประกาศตัวแปร ต้องการเชื่อมต่ออีกคลาสหนึ่ง
         private String myJSONString,myUserString, passwordString;
         private Context context; //การกำหนดค่าให้กับตัวแปร
+        private boolean statusABoolean = true;
+        private String truePassword;
 
         public SynUser(String myJSONString,
                     String myUserString,
@@ -79,7 +85,40 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d("RusV1", "JSON==>" + s);
+            try {   //เสี่ยงต่อการ error
 
+                JSONArray jsonArray = new JSONArray(s);
+
+                for (int i=0;i<jsonArray.length();i+=1) {   //จะเริ่มต้นจาก 0 แล้วจะทำการวน
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    if (myJSONString.equals(jsonObject.getString("User"))) {
+                        statusABoolean = false;
+                        truePassword = jsonObject.getString("Password");
+
+                    }
+
+                }//for
+                if (statusABoolean) { //ทำการแสดงกล่องข้อความถ้าไม่มีชื่อในฐานข้อมูล
+
+                MyAlert myAlert = new MyAlert();
+                myAlert.myDialog(context,"ไม่มี User นี้",
+                        "ไม่มี"+myUserString+"ในฐานข้อมูลเรา");
+                } else if (passwordString.equals(truePassword)) {
+                    //Password True
+                    Toast.makeText(context,"Welcome",Toast.LENGTH_SHORT).show();
+
+                } else {
+                    //Password False
+                    MyAlert myAlert = new MyAlert();
+                    myAlert.myDialog(context,"Password False",
+                            "Please Try Agin Password False");
+                }
+
+        } catch (Exception e) {
+                Log.d("RusV1", "e onPost ==>" + e.toString());
+            }
         } //onPost
 
     }   //SynUser Class
