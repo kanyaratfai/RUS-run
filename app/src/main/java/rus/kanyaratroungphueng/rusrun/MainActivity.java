@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         private Context context; //การกำหนดค่าให้กับตัวแปร
         private boolean statusABoolean = true;
         private String truePassword;
+        private String myNameString, myIDString,myAvataString;
 
         public SynUser(String myJSONString,
                     String myUserString,
@@ -96,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
                     if (myJSONString.equals(jsonObject.getString("User"))) {
                         statusABoolean = false;
                         truePassword = jsonObject.getString("Password");
+                        myNameString = jsonObject.getString("Name");
+                        myIDString = jsonObject.getString("id");
+                        myAvataString = jsonObject.getString("Avata");
 
                     }
 
@@ -107,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         "ไม่มี"+myUserString+"ในฐานข้อมูลเรา");
                 } else if (passwordString.equals(truePassword)) {
                     //Password True
-                    Toast.makeText(context,"Welcome",Toast.LENGTH_SHORT).show();//ถ้ารหัสถูกให้ขึ้นว่า Welcome
+                    Toast.makeText(context,"Welcome"+myNameString,Toast.LENGTH_SHORT).show();//ถ้ารหัสถูกให้ขึ้นว่า Welcome
 
                 } else {
                     //Password False
