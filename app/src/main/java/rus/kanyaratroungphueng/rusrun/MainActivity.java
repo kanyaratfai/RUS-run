@@ -1,6 +1,7 @@
 package rus.kanyaratroungphueng.rusrun;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private static final String urlLogo = "http://swiftcodingthai.com/rus/image/logo_rus.png";
     private String userString, passwordString;
-
+    private static final String urlJSON = "http://swiftcodingthai.com/rus/get_user_fai.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,17 @@ public class MainActivity extends AppCompatActivity {
         Picasso.with(this).load(urlLogo).into(imageView);
 
     } //Main Method
+
+    //Create Inner Class การสร้าง Class ภายใน
+    private class SynUser extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+            return null;
+        } // doInBack
+    }   //SynUser Class
+
+
 
     public void clickSignIn(View view) {
         userString = useEditText.getText().toString().trim();
