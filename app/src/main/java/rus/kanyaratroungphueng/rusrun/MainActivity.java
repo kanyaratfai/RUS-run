@@ -107,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
                         "ไม่มี"+myUserString+"ในฐานข้อมูลเรา");
                 } else if (passwordString.equals(truePassword)) {
                     //Password True
-                    Toast.makeText(context,"Welcome",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Welcome",Toast.LENGTH_SHORT).show();//ถ้ารหัสถูกให้ขึ้นว่า Welcome
 
                 } else {
                     //Password False
                     MyAlert myAlert = new MyAlert();
                     myAlert.myDialog(context,"Password False",
-                            "Please Try Agin Password False");
+                            "Please Try Again Password False");
                 }
 
         } catch (Exception e) {
