@@ -1,5 +1,6 @@
 package rus.kanyaratroungphueng.rusrun;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -36,10 +37,33 @@ public class MainActivity extends AppCompatActivity {
     //Create Inner Class การสร้าง Class ภายใน
     private class SynUser extends AsyncTask<Void, Void, String> {
 
-        @Override
+        // Explicit ประกาศตัวแปร ต้องการเชื่อมต่ออีกคลาสหนึ่ง
+        private String myJSONString,myUserString, passwordString;
+        private Context context; //การกำหนดค่าให้กับตัวแปร
+
+        public SynUser(String myJSONString,
+                    String myUserString,
+                       String myPasswordString,
+                    Context context) {
+                this.myJSONString = myJSONString;
+                this.myUserString = myUserString;
+                this.passwordString = myPasswordString;
+                this.context = context;
+        }
+
+        @Override// คือการสืบทอด
         protected String doInBackground(Void... params) {
+
+
+
             return null;
         } // doInBack
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        } //onPost
+
     }   //SynUser Class
 
 
@@ -55,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     "Please Fill All Every Blank");
         } else {
             //No Space
+            SynUser synUser = new SynUser(urlJSON, userString, passwordString, this);
+            synUser.execute();
+
         } //if
     } //clickSign
 
